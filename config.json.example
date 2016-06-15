@@ -70,6 +70,12 @@
           "CERT": "cert.pem"
         }
     },
+    "PUSHER": {
+        "ENABLED": "false",
+        "APP_ID": "appId",
+        "KEY": "key",
+        "SECRET": "secret"
+    },
     "FIREBASE": {
         "APP": "app-name",
         "SECRET": "secret",
