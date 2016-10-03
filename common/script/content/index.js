@@ -1232,9 +1232,9 @@ api.quests = {
       unlock: t('questGhostStagUnlockText')
     }
   },
-  bic2cal_1: {
-    text: "Pollution's Retribution",
-    notes: "After centuries of being neglected and negligence, Nature has had enough. The first of her spawn, the Air Pollution Monster, has coalesced over Berkeley! Take greener forms of transportation before it can choke you!",
+  bic2cal1: {
+    text: t('questBic2Cal1Text'),
+    notes: t('questBic2Cal1Note'),
     value: 0,
     lvl: 1,
     category: 'unlockable',
@@ -1249,15 +1249,20 @@ api.quests = {
           type: 'quests',
           key: "bic2cal_2",
           text: "Wrath of the Global Hottie"
+        },
+        {
+          type: 'gear',
+          key: 'body_special_calShirt',
+          text: t('questBic2Cal1DropBody'),
         }
       ],
         gp: 60,
         exp: 300,
     }
   },
-  bic2cal_2: {
-    text: "Wrath of the Global Hottie",
-    notes: "As the Air Pollution Monster's slowly clears, you spot the hazy form of a dragon in the distance. Sweat quickly gathers on your skin with its approach. Those around you scramble around in disarray. Some run off screaming doomsday while others merely begin returning to their jobs, refusing to believe in such a calamity. Only your party is left to stop Global Hottie's advance!"
+  bic2cal2: {
+    text: t('questBic2Cal2Text'),
+    notes: t('questBic2Cal2Note'),
     VALUE: 0,
     lvl: 1,
     category: 'unlockable',
@@ -1272,6 +1277,10 @@ api.quests = {
           type: 'quests',
           key: "bic2cal_3",
           text: "Scare-city"
+        }, {
+          type: 'gear',
+          text: t('questBic2Cal2DropEyewear'),
+          key: 'eyewear_special_bikerGlasses'
         }
       ],
       gp: 80,
