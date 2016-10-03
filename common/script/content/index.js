@@ -1232,6 +1232,53 @@ api.quests = {
       unlock: t('questGhostStagUnlockText')
     }
   },
+  bic2cal_1: {
+    text: "Pollution's Retribution",
+    notes: "After centuries of being neglected and negligence, Nature has had enough. The first of her spawn, the Air Pollution Monster, has coalesced over Berkeley! Take greener forms of transportation before it can choke you!",
+    value: 0,
+    lvl: 1,
+    category: 'unlockable',
+    boss: {
+      name: 'Air Pollution Monster',
+      hp: 1750, #35 people, 10 daily damage, 5 days
+      str: 1
+    }
+    drop: {
+      items: [
+        {
+          type: 'quests',
+          key: "bic2cal_2",
+          text: "Wrath of the Global Hottie"
+        }
+      ],
+        gp: 60,
+        exp: 300,
+    }
+  },
+  bic2cal_2: {
+    text: "Wrath of the Global Hottie",
+    notes: "As the Air Pollution Monster's slowly clears, you spot the hazy form of a dragon in the distance. Sweat quickly gathers on your skin with its approach. Those around you scramble around in disarray. Some run off screaming doomsday while others merely begin returning to their jobs, refusing to believe in such a calamity. Only your party is left to stop Global Hottie's advance!"
+    VALUE: 0,
+    lvl: 1,
+    category: 'unlockable',
+    boss: {
+      name: "Global Hottie",
+      hp: 2500,
+      str: 1.5,
+    },
+    drop: {
+      items: [
+        {
+          type: 'quests',
+          key: "bic2cal_3",
+          text: "Scare-city"
+        }
+      ],
+      gp: 80,
+      exp: 400,
+    }
+  },
+
   vice1: {
     text: t('questVice1Text'),
     notes: t('questVice1Notes'),
