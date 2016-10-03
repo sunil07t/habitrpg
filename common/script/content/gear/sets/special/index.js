@@ -489,8 +489,9 @@ let body = {
     },
   },
   calShirt: {
-    text: 'Cal T-Shirt',
-    Notes: 'Stained with the essence of countless Stanford victims. Go Bears! Confers no benefits.'
+    event: EVENTS.bic2cal
+    text: t('bodySpecialCalText'),
+    Notes: t('bodySpecialCalNotes')
     value: 20,
   }
 };
@@ -561,6 +562,7 @@ let eyewear = {
     value: 0,
   },
   bikerGlasses: {
+    event: EVENTS.bic2cal
     gearSet: 'glasses',
     text: t('eyewearSpecialBikerText'),
     notes: t('eyewearSpecialBikerNotes'),
