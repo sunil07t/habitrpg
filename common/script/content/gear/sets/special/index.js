@@ -488,6 +488,11 @@ let body = {
       return true;
     },
   },
+  calShirt: {
+    text: 'Cal T-Shirt',
+    Notes: 'Stained with the essence of countless Stanford victims. Go Bears! Confers no benefits.'
+    value: 20,
+  }
 };
 
 let eyewear = {
@@ -555,6 +560,12 @@ let eyewear = {
     notes: t('eyewearSpecialYellowTopFrameNotes'),
     value: 0,
   },
+  bikerGlasses: {
+    gearSet: 'glasses',
+    text: t('eyewearSpecialBikerText'),
+    notes: t('eyewearSpecialBikerNotes'),
+    value: 0,
+  }
 };
 
 let head = {
