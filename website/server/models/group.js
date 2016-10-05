@@ -248,6 +248,10 @@ schema.statics.toJSONCleanChat = function groupToJSONCleanChat (group, user) {
   return toJSON;
 };
 
+schema.methods.getParticipatingQuestMembers = function getParticipatingQuestMembers () {
+  return Object.keys(this.quest.members).filter(member => this.quest.members[member]);
+};
+
 schema.methods.removeGroupInvitations = async function removeGroupInvitations () {
   let group = this;
 
@@ -405,18 +409,29 @@ schema.methods.startQuest = async function startQuest (user) {
   // send notifications in the background without blocking
   User.find(
     { _id: { $in: nonUserQuestMembers } },
-    'party.quest items.quests auth.facebook auth.local preferences.emailNotifications pushDevices profile.name'
+    'party.quest items.quests auth.facebook auth.local preferences.emailNotifications preferences.pushNotifications pushDevices profile.name'
   ).exec().then((membersToNotify) => {
     let membersToEmail = _.filter(membersToNotify, (member) => {
       // send push notifications and filter users that disabled emails
-      sendPushNotification(member, 'HabitRPG', `${shared.i18n.t('questStarted')}: ${quest.text()}`);
-
       return member.preferences.emailNotifications.questStarted !== false &&
         member._id !== user._id;
     });
     sendTxnEmail(membersToEmail, 'quest-started', [
       { name: 'PARTY_URL', content: '/#/options/groups/party' },
     ]);
+    let membersToPush = _.filter(membersToNotify, (member) => {
+      // send push notifications and filter users that disabled emails
+      return member.preferences.pushNotifications.questStarted !== false &&
+        member._id !== user._id;
+    });
+    _.each(membersToPush, (member) => {
+      sendPushNotification(member,
+        {
+          title: quest.text(),
+          message: `${shared.i18n.t('questStarted')}: ${quest.text()}`,
+          identifier: 'questStarted',
+        });
+    });
   });
 };
 
@@ -439,11 +454,14 @@ schema.statics.cleanGroupQuest = function cleanGroupQuest () {
 // Changes the group object update members
 schema.methods.finishQuest = async function finishQuest (quest) {
   let questK = quest.key;
-  let updates = {$inc: {}, $set: {}};
-
-  updates.$inc[`achievements.quests.${questK}`] = 1;
-  updates.$inc['stats.gp'] = Number(quest.drop.gp);
-  updates.$inc['stats.exp'] = Number(quest.drop.exp);
+  let updates = {
+    $inc: {
+      [`achievements.quests.${questK}`]: 1,
+      'stats.gp': Number(quest.drop.gp),
+      'stats.exp': Number(quest.drop.exp),
+    },
+    $set: {},
+  };
 
   if (this._id === TAVERN_ID) {
     updates.$set['party.quest.completed'] = questK; // Just show the notif
@@ -478,7 +496,7 @@ schema.methods.finishQuest = async function finishQuest (quest) {
     }
   });
 
-  let q = this._id === TAVERN_ID ? {} : {_id: {$in: _.keys(this.quest.members)}};
+  let q = this._id === TAVERN_ID ? {} : {_id: {$in: this.getParticipatingQuestMembers()}};
   this.quest = {};
   this.markModified('quest');
 
@@ -521,7 +539,7 @@ schema.methods._processBossQuest = async function processBossQuest (options) {
 
   // Everyone takes damage
   await User.update({
-    _id: {$in: _.keys(_.pick(group.quest.members, _.identity))},
+    _id: {$in: this.getParticipatingQuestMembers()},
   }, {
     $inc: {'stats.hp': down},
   }, {multi: true}).exec();

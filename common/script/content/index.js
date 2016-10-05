@@ -1201,7 +1201,7 @@ api.quests = {
     }
   },
   ghost_stag: {
-    text: t('questGhostStagText'),
+    text: t('boss.name'),
     notes: t('questGhostStagNotes'),
     completion: t('questGhostStagCompletion'),
     value: 4,
@@ -1232,6 +1232,56 @@ api.quests = {
       unlock: t('questGhostStagUnlockText')
     }
   },
+  bic2cal1: {
+    text: t('questBic2Cal1Text'),
+    notes: t('questBic2Cal1Note'),
+    value: 4,
+    goldValue: 10,
+    lvl: 1,
+    category: 'gold',
+    boss: {
+      name: t('questBic2Cal1Boss'),
+      hp: 500, //35 people, 10 daily damage, 5 days
+      str: 1
+    },
+    drop: {
+      items: [
+        {
+          type: 'quests',
+          key: "bic2cal_2",
+          text: t('questBic2Cal2Text')
+        }
+      ],
+        gp: 100,
+        exp: 500,
+    }
+  },
+  bic2cal2: {
+    text: t('questBic2Cal2Text'),
+    notes: t('questBic2Cal2Note'),
+    value: 4,
+    goldValue: 1000,
+    lvl: 1,
+    category: 'gold',
+    previous: 'bic2cal1',
+    boss: {
+      name: t('questBic2Cal2Boss'),
+      hp: 1000,
+      str: 2,
+    },
+    drop: {
+      items: [
+        {
+          type: 'quests',
+          key: "bic2cal_3",
+          text: t('questBic2Cal3Text')
+        }
+      ],
+      gp: 500,
+      exp: 1000,
+    }
+  },
+
   vice1: {
     text: t('questVice1Text'),
     notes: t('questVice1Notes'),

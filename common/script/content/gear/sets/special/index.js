@@ -487,7 +487,7 @@ let body = {
     canBuy: () => {
       return true;
     },
-  },
+  }
 };
 
 let eyewear = {
@@ -554,7 +554,7 @@ let eyewear = {
     text: t('eyewearSpecialYellowTopFrameText'),
     notes: t('eyewearSpecialYellowTopFrameNotes'),
     value: 0,
-  },
+  }
 };
 
 let head = {

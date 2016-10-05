@@ -2,6 +2,9 @@
 
 habitrpg.controller('ChatCtrl', ['$scope', 'Groups', 'Chat', 'User', '$http', 'ApiUrl', 'Notification', 'Members', '$rootScope', 'Analytics',
     function($scope, Groups, Chat, User, $http, ApiUrl, Notification, Members, $rootScope, Analytics){
+    if ($scope.group) {
+      Chat.markChatSeen($scope.group.id);
+    }
     $scope.message = {content:''};
     $scope._sending = false;
 
@@ -31,7 +34,11 @@ habitrpg.controller('ChatCtrl', ['$scope', 'Groups', 'Chat', 'User', '$http', 'A
         .then(function(response) {
           var message = response.data.data.message;
 
-          group.chat.unshift(message);
+          if (message) {
+            group.chat.unshift(message);
+          } else {
+            group.chat = response.data.data.chat;
+          }
 
           $scope.message.content = '';
           $scope._sending = false;
