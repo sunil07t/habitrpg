@@ -386,8 +386,9 @@
 
   "questBic2Cal1Text": "Pollution's Retribution",
   "questBic2Cal1Note": "After centuries of being neglected and negligence, Nature has had enough. The first of her spawn, the Air Pollution Monster, has coalesced over Berkeley! Take greener forms of transportation before it can choke you!",
+  "questBic2Cal1Boss": "Air Pollution Monster",
   "questBic2Cal2Text": "Wrath of the Global Hottie",
+  "questBic2Cal2Boss": "Global Hottie",
   "questBic2Cal2Note": "As the Air Pollution Monster's slowly clears, you spot the hazy form of a dragon in the distance. Sweat quickly gathers on your skin with its approach. Those around you scramble around in disarray. Some run off screaming doomsday while others merely begin returning to their jobs, refusing to believe in such a calamity. Only your party is left to stop Global Hottie's advance!",
-  "questBic2Cal1DropBody": "Cal T-Shirt",
-  "questBic2Cal2DropEyewear": "Biker Glasses",
+  "questBic2Cal3Text": "Scare-city"
 }
