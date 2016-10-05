@@ -1201,7 +1201,7 @@ api.quests = {
     }
   },
   ghost_stag: {
-    text: t('boss.name'),
+    text: t('questGhostStagText'),
     notes: t('questGhostStagNotes'),
     completion: t('questGhostStagCompletion'),
     value: 4,
@@ -1241,7 +1241,7 @@ api.quests = {
     category: 'gold',
     boss: {
       name: t('questBic2Cal1Boss'),
-      hp: 500, //35 people, 10 daily damage, 5 days
+      hp: 500, 
       str: 1
     },
     drop: {
