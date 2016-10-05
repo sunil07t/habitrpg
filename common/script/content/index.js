@@ -1236,7 +1236,7 @@ api.quests = {
     text: t('questBic2Cal1Text'),
     notes: t('questBic2Cal1Note'),
     value: 4,
-    goldValue: 10,
+    goldValue: 5,
     lvl: 1,
     category: 'gold',
     boss: {
@@ -1260,7 +1260,7 @@ api.quests = {
     text: t('questBic2Cal2Text'),
     notes: t('questBic2Cal2Note'),
     value: 4,
-    goldValue: 1000,
+    goldValue: 20,
     lvl: 1,
     category: 'gold',
     previous: 'bic2cal1',
