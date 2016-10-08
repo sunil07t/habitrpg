@@ -1,5 +1,5 @@
-habitrpg.controller("ChallengesCtrl", ['$rootScope','$scope', 'Shared', 'User', 'Challenges', 'Notification', '$compile', 'Groups', '$state', '$stateParams', 'Members', 'Tasks', 'TAVERN_ID',
-  function($rootScope, $scope, Shared, User, Challenges, Notification, $compile, Groups, $state, $stateParams, Members, Tasks, TAVERN_ID) {
+habitrpg.controller("ChallengesCtrl", ['$rootScope','$scope', 'Shared', 'User', 'Challenges', 'Notification', '$compile', 'Groups', '$state', '$stateParams', 'Members', 'Tasks', 'TAVERN_ID', 'Analytics',
+  function($rootScope, $scope, Shared, User, Challenges, Notification, $compile, Groups, $state, $stateParams, Members, Tasks, TAVERN_ID, Analytics) {
 
     // Use presence of cid to determine whether to show a list or a single
     // challenge
@@ -40,6 +40,7 @@ habitrpg.controller("ChallengesCtrl", ['$rootScope','$scope', 'Shared', 'User', 
      * Create
      */
     $scope.create = function() {
+      Analytics.track({'hitType':'event','eventCategory':'button','eventAction':'click','eventLabel':'Create Challange'});
       //If the user has one filter selected, assume that the user wants to default to that group
       var defaultGroup;
       //Our filters contain all groups, but we only want groups that have atleast one challenge
@@ -141,6 +142,8 @@ habitrpg.controller("ChallengesCtrl", ['$rootScope','$scope', 'Shared', 'User', 
             challengeTasks = challengeTasks.concat(challenge.dailys);
             challengeTasks = challengeTasks.concat(challenge.rewards);
 
+            var value = challengeTasks.length;
+            Analytics.track({'hitType':'event','eventCategory':'button','eventAction':'click','eventLabel':'Create New Challange', 'eventValue': value});
             return Tasks.createChallengeTasks(_challenge._id, challengeTasks);
           })
           .then(function (response) {
@@ -150,6 +153,7 @@ habitrpg.controller("ChallengesCtrl", ['$rootScope','$scope', 'Shared', 'User', 
             User.sync();
           });
       } else {
+        Analytics.track({'hitType':'event','eventCategory':'button','eventAction':'click','eventLabel':'Update Challange'});
         Challenges.updateChallenge(challenge._id, challenge)
           .then(function (response) {
             var _challenge = response.data.data;
@@ -165,6 +169,7 @@ habitrpg.controller("ChallengesCtrl", ['$rootScope','$scope', 'Shared', 'User', 
      * Discard
      */
     $scope.discard = function() {
+      Analytics.track({'hitType':'event','eventCategory':'button','eventAction':'click','eventLabel':'Discard Challange'});
       $scope.newChallenge = null;
     };
 

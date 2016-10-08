@@ -28,12 +28,12 @@ habitrpg.controller("TasksCtrl", ['$scope', '$rootScope', '$location', 'User','N
       }
       User.score({params:{task: task, direction:direction}});
       Analytics.updateUser();
-      Analytics.track({'hitType':'event','eventCategory':'behavior','eventAction':'score task','taskType':task.type,'direction':direction});
+      Analytics.track({'hitType':'event','eventCategory':'behavior','eventAction':'score task', 'eventLabel': task.type, 'taskType':task.type,'direction':direction});
     };
 
     function addTask(addTo, listDef, tasks) {
       tasks = _.isArray(tasks) ? tasks : [tasks];
-
+      Analytics.track({'hitType':'event','eventCategory':'button','eventAction':'click','eventLabel':'Add tasks', 'eventValue': tasks.length});
       User.addTask({
         body: tasks.map(function (task) {
           return {
@@ -102,6 +102,7 @@ habitrpg.controller("TasksCtrl", ['$scope', '$rootScope', '$location', 'User','N
 
     $scope.removeTask = function(task) {
       if (!confirm(window.env.t('sureDelete', {taskType: window.env.t(task.type), taskText: task.text}))) return;
+      Analytics.track({'hitType':'event','eventCategory':'button','eventAction':'click','eventLabel':'Remove task'});
       User.deleteTask({params:{id: task._id, taskType: task.type}})
     };
 
