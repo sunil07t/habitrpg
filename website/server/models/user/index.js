@@ -10,6 +10,7 @@ export let publicFields = `preferences.size preferences.hair preferences.skin pr
   preferences.chair preferences.costume preferences.sleep preferences.background profile stats
   achievements party backer contributor auth.timestamps items`;
 
+export let minimalPublicFields = 'profile stats';
 // The minimum amount of data needed when populating multiple users
 export let nameFields = 'profile.name';
 

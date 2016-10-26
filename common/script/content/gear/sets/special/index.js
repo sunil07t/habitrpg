@@ -487,12 +487,6 @@ let body = {
     canBuy: () => {
       return true;
     },
-  },
-  calShirt: {
-    event: EVENTS.bic2cal
-    text: t('bodySpecialCalText'),
-    Notes: t('bodySpecialCalNotes')
-    value: 20,
   }
 };
 
@@ -559,13 +553,6 @@ let eyewear = {
     gearSet: 'glasses',
     text: t('eyewearSpecialYellowTopFrameText'),
     notes: t('eyewearSpecialYellowTopFrameNotes'),
-    value: 0,
-  },
-  bikerGlasses: {
-    event: EVENTS.bic2cal
-    gearSet: 'glasses',
-    text: t('eyewearSpecialBikerText'),
-    notes: t('eyewearSpecialBikerNotes'),
     value: 0,
   }
 };

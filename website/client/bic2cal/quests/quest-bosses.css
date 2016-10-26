@@ -1,0 +1,14 @@
+/*Manually made CSS because grunt did not work*/
+
+.quest_bic2cal1{
+	width: 150px;
+	height: 150px;
+	background: url(quest_bic2cal1.png);
+	background-repeat: no-repeat;
+}	
+.quest_bic2cal2{
+	width: 150px;
+	height: 150px;
+	background: url(quest_bic2cal2.png);
+	background-repeat: no-repeat;
+}	

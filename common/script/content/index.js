@@ -1235,56 +1235,50 @@ api.quests = {
   bic2cal1: {
     text: t('questBic2Cal1Text'),
     notes: t('questBic2Cal1Note'),
-    value: 0,
+    value: 4,
+    goldValue: 1,
     lvl: 1,
-    category: 'unlockable',
+    category: 'gold',
     boss: {
-      name: 'Air Pollution Monster',
-      hp: 1750, #35 people, 10 daily damage, 5 days
+      name: t('questBic2Cal1Boss'),
+      hp: 500, 
       str: 1
-    }
+    },
     drop: {
       items: [
         {
           type: 'quests',
           key: "bic2cal_2",
-          text: "Wrath of the Global Hottie"
-        },
-        {
-          type: 'gear',
-          key: 'body_special_calShirt',
-          text: t('questBic2Cal1DropBody'),
+          text: t('questBic2Cal2Text')
         }
       ],
-        gp: 60,
-        exp: 300,
+        gp: 150,
+        exp: 500,
     }
   },
   bic2cal2: {
     text: t('questBic2Cal2Text'),
     notes: t('questBic2Cal2Note'),
-    VALUE: 0,
+    value: 4,
+    goldValue: 20,
     lvl: 1,
-    category: 'unlockable',
+    category: 'gold',
+    previous: 'bic2cal1',
     boss: {
-      name: "Global Hottie",
-      hp: 2500,
-      str: 1.5,
+      name: t('questBic2Cal2Boss'),
+      hp: 1000,
+      str: 2,
     },
     drop: {
       items: [
         {
           type: 'quests',
           key: "bic2cal_3",
-          text: "Scare-city"
-        }, {
-          type: 'gear',
-          text: t('questBic2Cal2DropEyewear'),
-          key: 'eyewear_special_bikerGlasses'
+          text: t('questBic2Cal3Text')
         }
       ],
-      gp: 80,
-      exp: 400,
+      gp: 500,
+      exp: 1000,
     }
   },
 
