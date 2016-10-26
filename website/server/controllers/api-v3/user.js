@@ -10,10 +10,7 @@ import {
   basicFields as basicGroupFields,
   model as Group,
 } from '../../models/group';
-import { 
-  model as User,
-  minimalPublicFields as minPublicFields,
-   } from '../../models/user';
+import { model as User } from '../../models/user';
 import Bluebird from 'bluebird';
 import _ from 'lodash';
 import * as firebase from '../../libs/api-v3/firebase';
@@ -47,28 +44,6 @@ api.getUser = {
     user.stats.maxMP = common.statsComputed(user).maxMP;
 
     return res.respond(200, user);
-  },
-};
-
-/**
- * @api {get} /api/v3/users/all Get all users' username and stats 
- * @apiVersion 3.0.0
- * @apiName AllUserGet
- * @apiGroup User
- *
- * @apiSuccess {Object} data All the users' username and stats 
- */
-api.getAllUsers = {
-  method: 'GET',
-  middlewares: [authWithHeaders()],
-  url: '/user/all-users',
-  async handler (req, res) {
-    let allUsers = await User
-      .find({})
-      .select(minPublicFields)
-      .exec();
-
-    return res.respond(200, allUsers.toJSON({minimize: true}));
   },
 };
 

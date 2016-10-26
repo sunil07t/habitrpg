@@ -20,6 +20,31 @@ import sendPushNotification from '../../libs/api-v3/pushNotifications';
 
 let api = {};
 
+const minMembersFields = 'profile.name stats';
+
+/**
+ * @api {get} /api/v3/member/all Get all members' username and stats 
+ * @apiVersion 3.0.0
+ * @apiName GetAllMembers
+ * @apiGroup Member
+ *
+ * @apiSuccess {Object} data All the members' username and stats 
+ */
+api.getAllMembers = {
+  method: 'GET',
+  url: '/members/all',
+  middlewares: [],
+  async handler (req, res) {
+    let allUsers = await User
+      .find({})
+      .select(minMembersFields)
+      .exec();
+
+    return res.respond(200, allUsers.toJSON({minimize: true}));
+  },
+};
+
+
 /**
  * @api {get} /api/v3/members/:memberId Get a member profile
  * @apiVersion 3.0.0
