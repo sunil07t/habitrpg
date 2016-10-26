@@ -1241,7 +1241,7 @@ api.quests = {
     category: 'gold',
     boss: {
       name: t('questBic2Cal1Boss'),
-      hp: 500, 
+      hp: 40,
       str: 1
     },
     drop: {
@@ -1266,8 +1266,8 @@ api.quests = {
     previous: 'bic2cal1',
     boss: {
       name: t('questBic2Cal2Boss'),
-      hp: 1000,
-      str: 2,
+      hp: 55,
+      str: 1.5,
     },
     drop: {
       items: [
