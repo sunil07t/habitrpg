@@ -40,7 +40,7 @@ api.getAllMembers = {
       .select(minMembersFields)
       .exec();
 
-    return res.respond(200, allUsers.toJSON({minimize: true}));
+    res.respond(200, allUsers.toJSON({minimize: true}));
   },
 };
 
