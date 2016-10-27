@@ -39,8 +39,8 @@ api.getAllMembers = {
       .find({})
       .select(minMembersFields)
       .exec();
-
-    res.respond(200, allUsers.toJSON({minimize: true}));
+      
+    res.respond(200, allUsers.map(user => user.toJSON({minimize: true})));
   },
 };
 
