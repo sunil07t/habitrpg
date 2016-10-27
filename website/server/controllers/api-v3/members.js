@@ -20,7 +20,7 @@ import sendPushNotification from '../../libs/api-v3/pushNotifications';
 
 let api = {};
 
-const minMembersFields = 'profile.name stats';
+const minMembersFields = 'profile.name stats.lvl stats.exp party';
 
 /**
  * @api {get} /api/v3/member/all Get all members' username and stats 
@@ -28,7 +28,7 @@ const minMembersFields = 'profile.name stats';
  * @apiName GetAllMembers
  * @apiGroup Member
  *
- * @apiSuccess {Object} data All the members' username and stats 
+ * @apiSuccess {array} data An array of all the members' username, exp, level and party
  */
 api.getAllMembers = {
   method: 'GET',
@@ -39,7 +39,7 @@ api.getAllMembers = {
       .find({})
       .select(minMembersFields)
       .exec();
-      
+
     res.respond(200, allUsers.map(user => user.toJSON({minimize: true})));
   },
 };
