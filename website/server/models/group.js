@@ -136,7 +136,7 @@ function _cleanQuestProgress (merge) {
 }
 
 schema.statics.getGroup = async function getGroup (options = {}) {
-  let {user, groupId, fields, optionalMembership = false, populateLeader = false, requireMembership = false} = options;
+  let {user, groupId, fields, optionalMembership = true, populateLeader = false, requireMembership = false} = options;
   let query;
 
   let isUserParty = groupId === 'party' || user.party._id === groupId;
