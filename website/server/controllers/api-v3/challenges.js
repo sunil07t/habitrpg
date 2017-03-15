@@ -382,8 +382,7 @@ api.challengeLeaderboard = {
 
       resArray[index].push(`${task.type}:${task.text}`, task.value, task.notes);
     });
-    let response = resArray.toJSON({minimize: true});
-    res.status(200).send(response);
+    res.status(200).send(JSON.stringify(resArray));
   },
 };
 
