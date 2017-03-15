@@ -382,7 +382,7 @@ api.challengeLeaderboard = {
 
       resArray[index].push(`${task.type}:${task.text}`, task.value, task.notes);
     });
-    res.status(200, JSON.stringify(resArray));
+    res.respond(200, resArray);
   },
 };
 
