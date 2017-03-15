@@ -330,7 +330,7 @@ api.getChallenge = {
 /**
  * @api {get} /api/v3/challenges/:challengeId/leaderboard Get information of memebers in a challenge for leaderboard
  * @apiVersion 3.0.0
- * @apiName ChallengeForLeaderboard
+ * @apiName ChallengeLeaderboard
  * @apiGroup Challenge
  *
  * @apiParam {UUID} challengeId The challenge _id
@@ -382,8 +382,7 @@ api.challengeLeaderboard = {
 
       resArray[index].push(`${task.type}:${task.text}`, task.value, task.notes);
     });
-    console.log(resArray);
-    res.status(200).send(JSON.stringify(resArray));
+    res.status(200, JSON.stringify(resArray));
   },
 };
 
