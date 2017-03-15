@@ -366,7 +366,7 @@ api.challengeLeaderboard = {
         .exec(),
 
       Tasks.Task.find({'challenge.id': challengeId, userId: {$exists: true}})
-        .sort({userId: 1, text: 1}).select('userId type text value notes').lean().exec(),
+        .sort({userId: 1, text: 1}).select('userId value').lean().exec(),
     ]);
 
     let resArray = members.map(member => [member._id, member.profile.name]);
@@ -380,7 +380,7 @@ api.challengeLeaderboard = {
         index++;
       }
 
-      resArray[index].push(`${task.type}:${task.text}`, task.value, task.notes);
+      resArray[index].push(task.value);
     });
     res.respond(200, resArray);
   },
