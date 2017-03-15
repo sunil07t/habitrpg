@@ -328,6 +328,66 @@ api.getChallenge = {
 };
 
 /**
+ * @api {get} /api/v3/challenges/:challengeId/leaderboard Get information of memebers in a challenge for leaderboard
+ * @apiVersion 3.0.0
+ * @apiName ChallengeForLeaderboard
+ * @apiGroup Challenge
+ *
+ * @apiParam {UUID} challengeId The challenge _id
+ *
+ * @apiSuccess {array} challenge information for leaderboard
+ */
+api.challengeLeaderboard = {
+  method: 'GET',
+  url: '/challenges/:challengeId/leaderboard',
+  middlewares: [authWithSession],
+  async handler (req, res) {
+    req.checkParams('challengeId', res.t('challengeIdRequired')).notEmpty().isUUID();
+
+    let validationErrors = req.validationErrors();
+    if (validationErrors) throw validationErrors;
+
+    let user = res.locals.user;
+    let challengeId = req.params.challengeId;
+
+    let challenge = await Challenge.findById(challengeId).select('_id group leader tasksOrder').exec();
+    if (!challenge) throw new NotFound(res.t('challengeNotFound'));
+    let group = await Group.getGroup({user, groupId: challenge.group, fields: '_id type privacy', optionalMembership: true});
+    if (!group || !challenge.canView(user, group)) throw new NotFound(res.t('challengeNotFound'));
+
+    // In v2 this used the aggregation framework to run some computation on MongoDB but then iterated through all
+    // results on the server so the perf difference isn't that big (hopefully)
+
+    let [members, tasks] = await Bluebird.all([
+      User.find({challenges: challengeId})
+        .select(nameFields)
+        .sort({_id: 1})
+        .lean() // so we don't involve mongoose
+        .exec(),
+
+      Tasks.Task.find({'challenge.id': challengeId, userId: {$exists: true}})
+        .sort({userId: 1, text: 1}).select('userId type text value notes').lean().exec(),
+    ]);
+
+    let resArray = members.map(member => [member._id, member.profile.name]);
+
+    // We assume every user in the challenge as at least some data so we can say that members[0] tasks will be at tasks [0]
+    let lastUserId;
+    let index = -1;
+    tasks.forEach(task => {
+      if (task.userId !== lastUserId) {
+        lastUserId = task.userId;
+        index++;
+      }
+
+      resArray[index].push(`${task.type}:${task.text}`, task.value, task.notes);
+    });
+    let response = resArray.toJSON({minimize: true});
+    res.status(200).send(response);
+  },
+};
+
+/**
  * @api {get} /api/v3/challenges/:challengeId/export/csv Export a challenge in CSV
  * @apiVersion 3.0.0
  * @apiName ExportChallengeCsv
